@@ -1,6 +1,5 @@
 
 from tkinter import *
-from tkinter import messagebox
 from socket import *
 import _thread
 s=socket(AF_INET,SOCK_STREAM)
@@ -24,16 +23,16 @@ def rec():
     global r,s,lab
     while True:
         w=c.recv(2048)
-        Button(wind,text=w.decode('utf-8'),bd=5,relief=FLAT,bg='#d12e44',padx=5,pady=5,wraplength=100).grid(column=2,row=r) 
+        Button(wind,text=w.decode('utf-8')).grid(column=2,row=r) 
         r=r+1
-_thread.start_new_thread(rec,())
 def clicked():
-    global r,c,lab,entryText
+    global r
     c.send((en.get()).encode('utf-8'))
     x=en.get()
-    Button(wind,text=x,bd=5,relief=FLAT,bg='#d1c62e',padx=5,pady=5,wraplength=100).grid(column=0,row=r)
+    Button(wind,text=x,bd=10,relief=FLAT,bg='#d1c62e',padx=5,pady=5,wraplength=100).grid(column=0,row=r)
     entryText.set("")
     r=r+1
+_thread.start_new_thread(rec,())
 btn["command"]=clicked 
 wind.mainloop()
 
